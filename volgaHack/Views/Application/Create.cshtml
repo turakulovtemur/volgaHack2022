@@ -1,0 +1,31 @@
+﻿@model volgaHack.ViewModels.ApplicationViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col order-5">
+
+        </div>
+        <div class="col order-1" style=" margin-top: 50px;">
+
+            <form method="post" asp-action="Create" asp-controller="Application" class="form-container">
+                <div class="form-row">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="col">
+                        <label asp-for="Name">Название приложения</label>
+                        <input type="text" class="form-control" asp-for="Name" placeholder="Название ">
+                    </div>
+
+                    <div class="col ">
+                        <label asp-for="Description">Описание</label>
+                        <input type="text" class="form-control" asp-for="Description" placeholder="Описание">
+                    </div>
+                </div>
+                </br>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </form>
+        </div>
+    </div>
+</div>

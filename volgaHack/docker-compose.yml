@@ -1,0 +1,12 @@
+﻿version: "3"
+services:
+  testdb:
+   image: postgres
+   restart: always
+   container_name: volga
+   environment:
+   - "POSTGRES_USER=postgres"
+   - "POSTGRES_PASSWORD=mysecretpassword"
+   - "POSTGRES_DB=postgres"
+   ports:
+   - 44218:5432

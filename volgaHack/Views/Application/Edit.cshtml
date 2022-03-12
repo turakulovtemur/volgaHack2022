@@ -1,0 +1,39 @@
+﻿@model volgaHack.Models.Applications
+
+<div class="container">
+    <div class="row">
+       
+        <div class="col " style=" margin-top: 60px;">
+
+            <form method="post" asp-action="Edit" asp-controller="Application"  >
+                <h2 align="center">Редактирование данных</h2>
+                <div>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" asp-for="Id" />
+                    </div>
+
+                    <div class=" input-group mb-3 input-group-lg">
+                        <span class="input-group-text" asp-for="Name">Название приложения</span>
+                        <input type="text" class="form-control" asp-for="Name">
+                    </div>
+
+
+                    <div class=" input-group mb-3 input-group-lg">
+                        <span class="input-group-text" asp-for="DateCreatedApp">Дата создания</span>
+                        <input type="text" class="form-control" asp-for="DateCreatedApp">
+                    </div>
+
+                    <div class=" input-group mb-3 input-group-lg">
+                        <span class="input-group-text" asp-for="Description">Описание</span>
+                        <input type="text" class="form-control" asp-for="Description">
+                    </div>
+
+
+                </div>
+                <input type="submit" value="Сохранить" class="btn btn-primary" style=" margin-left: 57px;" />
+
+            </form>
+        </div>
+    </div>
+</div>
