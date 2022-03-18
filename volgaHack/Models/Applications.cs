@@ -17,10 +17,11 @@ namespace volgaHack.Models
 
         public DateTime DateCreatedApp { get; set; }
 
+        [ForeignKey(nameof(UserId))]
         public string UserId { get; set; }
 
 
-        [ForeignKey(nameof(UserId))]
+        
         public User User { get; set; }
     }
 }

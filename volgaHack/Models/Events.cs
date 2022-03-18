@@ -16,9 +16,10 @@ namespace volgaHack.Models
         public string Description { get; set; }
         public DateTime DateCreatedEvent { get; set; }
 
+        [ForeignKey(nameof(ApplicationId))]
         public int ApplicationId { get; set; }
 
-        [ForeignKey(nameof(ApplicationId))]
+        
         public Applications Applications { get; set; }
     }
 }

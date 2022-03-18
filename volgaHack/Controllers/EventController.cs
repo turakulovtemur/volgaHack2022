@@ -117,10 +117,27 @@ namespace volgaHack.Controllers
 
 
         [HttpGet]
-        public IActionResult Index()
+        public ActionResult Delete([FromRoute] int? id)
         {
+            if (id == null)
+            {
+                return new NotFoundResult();
+            }
+            var events = context.Events.FirstOrDefault(r => r.Id == id);
+            if (events == null)
+            {
+                return new NotFoundResult();
+            }
+            return View(events);
+        }
 
-            return View();
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var events = await context.Events.FindAsync(id);
+            context.Events.Remove(events);
+            await context.SaveChangesAsync();
+            return RedirectToAction("Index", "Application");
         }
     }
 }

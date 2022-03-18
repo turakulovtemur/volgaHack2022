@@ -9,7 +9,10 @@
 
         </div>
         <div class="col order-1" style=" margin-top: 50px;">
-            <a asp-action="Create" asp-controller="Event" asp-route-id="@Model.ApplicationId">Создать событие</a>
+            <div class="col">
+                <a asp-action="Create" asp-controller="Event" class="btn btn-outline-dark" asp-route-id="@Model.ApplicationId">Создать событие</a>
+            </div><br />
+            
             <table class="table table-hover">
                 <thead>
                     <tr>

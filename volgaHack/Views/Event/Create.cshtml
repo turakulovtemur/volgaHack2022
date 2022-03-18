@@ -8,8 +8,10 @@
                 <h2 align="center">Создание события</h2>
                 <div>
                     <div asp-validation-summary="All" class="text-danger"></div>
-
-                    <input type="text" readonly asp-for="ApplicationId"/>
+                    <div class=" input-group mb-3 input-group-lg">                      
+                        <input type="text"  class="invisible" asp-for="ApplicationId" />
+                    </div>
+                   
                     <div class=" input-group mb-3 input-group-lg">
                         <span class="input-group-text" asp-for="Name">Название собития</span>
                         <input type="text" class="form-control" asp-for="Name" placeholder="Название ">
