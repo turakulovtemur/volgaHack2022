@@ -1,4 +1,4 @@
-﻿@model IEnumerable<volgaHack.ViewModels.ApplicationViewModel>
+﻿@model IEnumerable<volgaHack.ViewModels.EventViewModel>
 
 <div class="container">
     <div class="row">
@@ -9,15 +9,14 @@
 
         </div>
         <div class="col order-1" style=" margin-top: 50px;">
-            <a asp-action="Create" asp-controller="Application" class="btn btn-outline-info">Создать приложение</a></br>
+            <a asp-action="Create" asp-controller="Event">Создать событие</a>
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Название приложения</th>
+                        <th scope="col">Название события</th>
                         <th scope="col">Описание</th>
-                        <th scope="col">Дата создания</th>
-                        <th scope="col"> </th>
+                        <th scope="col">Дата события</th>
                         <th scope="col"> </th>
                         <th scope="col"> </th>
                     </tr>
@@ -33,20 +32,18 @@
                             <td scope="row"></td>
                             <td>@app.Name</td>
                             <td>@app.Description</td>
-                            <td>@app.DateCreatedApp</td>
+                            <td>@app.EventDate</td>
                             <td>
-                                <a asp-action="Edit" asp-controller="Application" asp-route-id="@app.Id" class="btn btn-outline-info">Редактировать</a>
+                                <a asp-action="Edit" asp-controller="Event" asp-route-id="@app.Id" class="btn btn-outline-info">Редактировать</a>
                             </td>
 
                             <td>
 
-                                <form method="post" asp-action="Delete" asp-controller="Application" asp-route-id="@app.Id">
+                                <form method="post" asp-action="Delete" asp-controller="Event" asp-route-id="@app.Id">
                                     <input type="submit" class="btn btn-outline-danger" value="Удалить" />
                                 </form>
                             </td>
-                            <td>
-                                <a asp-action="EventList" asp-controller="Event" asp-route-id="@app.Id"  class="btn btn-outline-info">Cобытия</a>
-                            </td>
+
                         </tr>
 
                         }

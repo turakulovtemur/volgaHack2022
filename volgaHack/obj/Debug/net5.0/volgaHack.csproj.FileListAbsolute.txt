@@ -67,3 +67,6 @@ C:\Users\admin\source\repos\volgaHack\volgaHack\obj\Debug\net5.0\Razor\Views\Rol
 C:\Users\admin\source\repos\volgaHack\volgaHack\obj\Debug\net5.0\Razor\Views\Application\Index.cshtml.g.cs
 C:\Users\admin\source\repos\volgaHack\volgaHack\obj\Debug\net5.0\Razor\Views\Application\Create.cshtml.g.cs
 C:\Users\admin\source\repos\volgaHack\volgaHack\obj\Debug\net5.0\Razor\Views\Application\Edit.cshtml.g.cs
+C:\Users\admin\source\repos\volgaHack\volgaHack\obj\Debug\net5.0\Razor\Views\Event\Index.cshtml.g.cs
+C:\Users\admin\source\repos\volgaHack\volgaHack\obj\Debug\net5.0\Razor\Views\Event\Create.cshtml.g.cs
+C:\Users\admin\source\repos\volgaHack\volgaHack\obj\Debug\net5.0\Razor\Views\Event\EventList.cshtml.g.cs

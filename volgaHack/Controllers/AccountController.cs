@@ -17,9 +17,9 @@ namespace volgaHack.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
+            
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -35,13 +35,15 @@ namespace volgaHack.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email };
-                // добавляем пользователя
-                var result = await _userManager.CreateAsync(user, model.Password);
+                User user = new User { Email = model.Email, UserName = model.Email }; // добавляем пользователя
+
+                var result = await _userManager.CreateAsync(user, model.Password);               
                 if (result.Succeeded)
                 {
-                    // установка куки
-                    await _signInManager.SignInAsync(user, false);
+                    await _userManager.AddToRoleAsync(user, "user");// добавление роли "user" для пользователя 
+                    
+                    await _signInManager.SignInAsync(user, false); // установка куки
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 else
