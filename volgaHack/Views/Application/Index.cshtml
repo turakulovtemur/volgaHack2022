@@ -30,26 +30,29 @@
                             @foreach (var app in Model)
                             {
 
-                                <tr>
+                            <tr>
 
-                                    <td scope="row"></td>
-                                    <td>@app.Name</td>
-                                    <td>@app.Description</td>
-                                    <td>@app.DateCreatedApp</td>
-                                    <td>
-                                        <a asp-action="Edit" asp-controller="Application" asp-route-id="@app.Id" class="btn btn-outline-info">Редактировать</a>
-                                    </td>
+                                <td scope="row"></td>
+                                <td>@app.Name</td>
+                                <td>@app.Description</td>
+                                <td>@app.DateCreatedApp</td>
+                                <td>
+                                    <a asp-action="Edit" asp-controller="Application" asp-route-id="@app.Id" class="btn btn-outline-info">Редактировать</a>
+                                </td>
 
-                                    <td>
+                                <td>
 
-                                        <form method="post" asp-action="Delete" asp-controller="Application" asp-route-id="@app.Id">
-                                            <input type="submit" class="btn btn-outline-danger" value="Удалить" />
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <a asp-action="EventList" asp-controller="Event" asp-route-id="@app.Id" class="btn btn-outline-info">Cобытия</a>
-                                    </td>
-                                </tr>
+                                    <form method="post" asp-action="Delete" asp-controller="Application" asp-route-id="@app.Id">
+                                        <input type="submit" class="btn btn-outline-danger" value="Удалить" />
+                                    </form>
+                                </td>
+                                <td>
+                                    <a asp-action="EventList" asp-controller="Event" asp-route-id="@app.Id" class="btn btn-outline-info">Cобытия</a>
+                                </td>
+                                <td>
+                                    <a asp-action="Index" asp-controller="Statistic" asp-route-id="@app.Id" class="btn btn-outline-info">Статистика</a>
+                                </td>
+                            </tr>
 
                             }
                         </tbody>

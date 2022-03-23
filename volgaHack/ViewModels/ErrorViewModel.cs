@@ -1,6 +1,6 @@
 using System;
 
-namespace volgaHack.Models
+namespace volgaHack.ViewModels
 {
     public class ErrorViewModel
     {

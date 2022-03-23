@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using DAL.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace volgaHack.Models
+namespace DAL
 {
-    public class ApplicationContext: IdentityDbContext<User>
+    public class ApplicationContext : IdentityDbContext<User>
     {
         public DbSet<Applications> Applications { get; set; }
         public DbSet<Events> Events { get; set; }

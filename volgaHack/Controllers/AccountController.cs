@@ -1,14 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using volgaHack.Models;
 using volgaHack.ViewModels;
 
 namespace volgaHack.Controllers
@@ -19,7 +12,7 @@ namespace volgaHack.Controllers
         private readonly SignInManager<User> _signInManager;
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            
+
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -37,13 +30,13 @@ namespace volgaHack.Controllers
             {
                 User user = new User { Email = model.Email, UserName = model.Email }; // добавляем пользователя
 
-                var result = await _userManager.CreateAsync(user, model.Password);               
+                var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, "user");// добавление роли "user" для пользователя 
-                    
+
                     await _signInManager.SignInAsync(user, false); // установка куки
-                    
+
                     return RedirectToAction("Index", "Home");
                 }
                 else

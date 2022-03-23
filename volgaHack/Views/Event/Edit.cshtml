@@ -1,11 +1,11 @@
-﻿@model volgaHack.ViewModels.ApplicationViewModel
+﻿@model volgaHack.ViewModels.EventViewModel
 
 <div class="container">
     <div class="row">
-       
+
         <div class="col " style=" margin-top: 60px;">
 
-            <form method="post" asp-action="Edit" asp-controller="Application"  >
+            <form method="post" asp-action="Edit" asp-controller="Event">
                 <h2 align="center">Редактирование данных</h2>
                 <div>
                     <div asp-validation-summary="All" class="text-danger"></div>
@@ -14,14 +14,14 @@
                     </div>
 
                     <div class=" input-group mb-3 input-group-lg">
-                        <span class="input-group-text" asp-for="Name">Название приложения</span>
+                        <span class="input-group-text" asp-for="Name">Название события</span>
                         <input type="text" class="form-control" asp-for="Name">
                     </div>
 
 
                     <div class=" input-group mb-3 input-group-lg">
                         <span class="input-group-text" asp-for="DateCreatedApp">Дата создания</span>
-                        <input type="text" class="form-control" asp-for="DateCreatedApp">
+                        <input type="text" class="form-control" asp-for="EventDate">
                     </div>
 
                     <div class=" input-group mb-3 input-group-lg">

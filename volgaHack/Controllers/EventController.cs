@@ -1,17 +1,18 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DAL;
+using DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using volgaHack.Models;
 using volgaHack.ViewModels;
 
 namespace volgaHack.Controllers
 {
     public class EventController : Controller
     {
-        ApplicationContext context;
+        private ApplicationContext context;
         private readonly UserManager<User> _userManager;
 
         public EventController(ApplicationContext db, UserManager<User> userManager)
@@ -41,7 +42,7 @@ namespace volgaHack.Controllers
         {
             if (ModelState.IsValid)
             {
-  
+
                 Events events = new Events
                 {
                     Name = model.Name,
@@ -52,10 +53,50 @@ namespace volgaHack.Controllers
 
                 context.Events.Add(events);
                 await context.SaveChangesAsync();
-                return RedirectToAction("Index","Application");
+                return RedirectToAction("Index", "Application");
             }
             return View(model);
         }
+
+        /*[HttpGet]
+        public async Task<IActionResult> Edit([FromRoute] int? id)
+        {
+            Events events = await context.Events.FindAsync(id);
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+            if (events == null)
+            {
+                return NotFound();
+            }
+
+            return View(events);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(EventViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ModelState.AddModelError("Error", "Не валидная модель");
+            }
+
+
+            Events events = context.Events.Find(model.Id);
+
+            events.Name = model.Name;
+            events.Description = model.Description;
+            events.DateCreatedEvent = model.EventDate;
+            events.ApplicationId = model.ApplicationId;
+
+            context.Events.Update(events);
+            await context.SaveChangesAsync();
+
+            return RedirectToActionPermanent("EventList");
+
+        }*/
 
 
         [HttpGet]
@@ -68,7 +109,7 @@ namespace volgaHack.Controllers
                   Id = app.Id,
                   Name = app.Name,
                   Description = app.Description,
-                  EventDate = (DateTime)(app.DateCreatedEvent)
+                  EventDate = app.DateCreatedEvent
               }).ToList();
 
 
@@ -109,7 +150,7 @@ namespace volgaHack.Controllers
                    Id = app.Id,
                    Name = app.Name,
                    Description = app.Description,
-                   EventDate = (DateTime)(app.DateCreatedEvent)
+                   EventDate = app.DateCreatedEvent
                }).ToList();
 
             return View(apps);

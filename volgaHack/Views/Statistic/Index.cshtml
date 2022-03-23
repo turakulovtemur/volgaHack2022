@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BLL.Models.Dtos.QueryStatisticDto>
+
+<div class="container">
+    <div class="row">
+        <div hidden class="col">
+
+        </div>
+        <div hidden class="col order-5">
+
+        </div>
+        <div class="col order-1" style=" margin-top: 50px;">
+            
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Название приложения</th>
+                        <th scope="col">Описание</th>
+                        <th scope="col">Дата создания</th>
+                        <th scope="col"> </th>
+                        <th scope="col"> </th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                @if (@User.IsInRole("user"))
+                {
+                    <tbody>
+                        @foreach (var app in Model)
+                        {
+
+                            <tr>
+
+                                <td scope="row"></td>
+                                <td>@app.Name</td>
+                                <td>@app.Description</td>
+                                <td>@app.DateCreatedEvent.ToString()</td>
+                                
+                                <td>
+                                   @* <a asp-action="///////" asp-controller="//////"  class="btn btn-outline-info">Статистика приложения</a>*@
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                }
+
+
+
+            </table>
+
+        </div>
+    </div>
+</div>

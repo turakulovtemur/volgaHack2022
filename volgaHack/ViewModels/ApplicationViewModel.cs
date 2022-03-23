@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace volgaHack.ViewModels
 {
@@ -15,7 +11,6 @@ namespace volgaHack.ViewModels
         public string Description { get; set; }
 
         public DateTime DateCreatedApp { get; set; }
-
         
     }
 }

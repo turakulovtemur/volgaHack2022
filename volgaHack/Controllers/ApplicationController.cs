@@ -1,22 +1,23 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DAL;
+using DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using volgaHack.Models;
 using volgaHack.ViewModels;
 
 namespace volgaHack.Controllers
 {
- 
+
     [Authorize]
     public class ApplicationController : Controller
     {
         ApplicationContext context;
         private readonly UserManager<User> _userManager;
-        
+
         public ApplicationController(ApplicationContext db, UserManager<User> userManager)
         {
             context = db;
@@ -26,41 +27,41 @@ namespace volgaHack.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            
+
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(ApplicationViewModel model)
-        {           
+        {
 
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                var userName = Request.HttpContext.User.Identity.Name;
+                var user = await _userManager.FindByEmailAsync(userName);
+                Applications application = new Applications
                 {
-                    var userName = Request.HttpContext.User.Identity.Name;
-                    var user = await _userManager.FindByEmailAsync(userName);
-                    Applications application = new Applications
-                    {
-                        Id = model.Id,
-                        Name = model.Name,
-                        Description = model.Description,
-                        DateCreatedApp = DateTime.Today,
-                        UserId = user?.Id
-                    };
+                    Id = model.Id,
+                    Name = model.Name,
+                    Description = model.Description,
+                    DateCreatedApp = DateTime.Today,
+                    UserId = user?.Id
+                };
 
-                    context.Applications.Add(application);
-                    await context.SaveChangesAsync();
-                   
-                    return RedirectToActionPermanent("Index");
-                }
-           
+                context.Applications.Add(application);
+                await context.SaveChangesAsync();
+
+                return RedirectToActionPermanent("Index");
+            }
+
             return View(model);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit([FromRoute]int? id)
+        public async Task<IActionResult> Edit([FromRoute] int? id)
         {
             Applications app = await context.Applications.FindAsync(id);
-            
+
             if (id == null)
             {
                 return NotFound();
@@ -78,7 +79,7 @@ namespace volgaHack.Controllers
         {
             if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Error", "Не валидная модель"); 
+                ModelState.AddModelError("Error", "Не валидная модель");
             }
 
 
@@ -96,11 +97,11 @@ namespace volgaHack.Controllers
             await context.SaveChangesAsync();
 
             return RedirectToActionPermanent("Index");
-           
+
         }
 
         [HttpGet]
-        public ActionResult Delete([FromRoute]int? id)
+        public ActionResult Delete([FromRoute] int? id)
         {
             if (id == null)
             {
@@ -130,7 +131,7 @@ namespace volgaHack.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-           
+
             var userName = User.Identity.Name;
 
             var user = await _userManager.FindByEmailAsync(userName);
@@ -141,10 +142,10 @@ namespace volgaHack.Controllers
                     Id = app.Id,
                     Name = app.Name,
                     Description = app.Description,
-                    DateCreatedApp = (DateTime)(app.DateCreatedApp)
+                    DateCreatedApp = app.DateCreatedApp
                 }).ToList();
-          
-            
+
+
             return View(apps);
         }
     }

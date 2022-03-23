@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BLL.Models.Dtos;
+using DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using volgaHack.Models;
 using volgaHack.ViewModels;
 
 namespace volgaHack.Controllers
@@ -20,7 +21,6 @@ namespace volgaHack.Controllers
             _userManager = userManager;
         }
 
-       
         [HttpGet]
         public IActionResult Index() => View(_roleManager.Roles.ToList());
 
@@ -60,7 +60,11 @@ namespace volgaHack.Controllers
         }
 
         [HttpGet]
-        public IActionResult UserList() => View(_userManager.Users.ToList());
+        public IActionResult UserList() => View(_userManager.Users.Select(x => new UserDto
+        {
+            Id = x.Id,
+            Email = x.Email
+        }).ToList());
 
         [HttpGet]
         public async Task<IActionResult> Edit(string userId)
@@ -108,6 +112,6 @@ namespace volgaHack.Controllers
             }
 
             return NotFound();
-        } 
+        }
     }
 }

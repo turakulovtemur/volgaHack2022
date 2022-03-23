@@ -1,3 +1,6 @@
+using BLL.Services;
+using DAL;
+using DAL.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +14,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using volgaHack.Models;
 
 namespace volgaHack
 {
@@ -44,6 +46,9 @@ namespace volgaHack
 
             services.AddControllersWithViews();
             services.AddMvc();
+
+
+            services.AddScoped<IStatisticService, StatisticService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
