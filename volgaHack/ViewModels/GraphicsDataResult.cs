@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using volgaHack.ViewModels.Chart;
 
 namespace volgaHack.ViewModels
 {
@@ -9,8 +10,8 @@ namespace volgaHack.ViewModels
     {
         public int AppId { get; set; }
 
-        public List<string> Labels { get; set; }
+        public string AppName {get;set;}
 
-        public List<int> Data { get; set; }
+        public List<ChartDataViewModel> ChartData { get; set; }
     }
 }

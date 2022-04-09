@@ -49,6 +49,7 @@ namespace volgaHack
 
 
             services.AddScoped<IStatisticService, StatisticService>();
+            services.AddScoped<IAppService, AppService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

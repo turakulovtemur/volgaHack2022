@@ -5,7 +5,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div>
                 <canvas id="myChart"></canvas>
-                <input type="text" id="appId" hidden value="@Model.AppId" >
+                <input type="text" id="appId" hidden value="@Model.AppId">
             </div>
         </div>
     </div>
@@ -13,39 +13,16 @@
 
 
 <script type="text/javascript">
-
-
-    function prepareGraphics(labels, graphicsValues) {
-
-        var id = $('#appId').val();
-        debugger;
-        console.log(id)
-
+    function prepareGraphics(dataSetName,labels, graphicsValues, colors, borderColors) {
         const data = {
             labels: labels,
             datasets: [{
-                label: 'My First Dataset',
+                label: `Статистика событий по приложению ${dataSetName}`,
                 data: graphicsValues,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                   @* 'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)' *@
-                ],
-            borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                        @* 'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)' *@
-                    ],
-            borderWidth: 1
-                }]
+                backgroundColor: colors,
+                borderColor: borderColors,
+                borderWidth: 1
+            }]
         };
 
         const config = {
@@ -70,15 +47,22 @@
         var id = $('#appId').val();
 
         $.get(`/data?appId=${id}`, function (data) {
-            prepareGraphics(data.labels, data.data);
-        })
-        .done(function () {
-        })
-        .fail(function (e) {
-            console.log(e);
-        });
+            var chartData = prepareData(data.chartData);
+
+            prepareGraphics(data.appName, chartData.labels, chartData.data, chartData.colors, chartData.borderColor);
+        }).fail(function (e) {
+                console.log(e);
+         });
     }
 
+    function prepareData(data) {
+        return {
+            data: data.map((cur) => { return cur.data; }),
+            colors: data.map((cur) => { return cur.color; }),
+            labels: data.map((cur) => { return cur.label; }),
+            borderColor: data.map((cur) => { return cur.borderColor; })
+        }
+    }
 
     $(document).ready(() => {
         buildGraphic();
