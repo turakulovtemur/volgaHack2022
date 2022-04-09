@@ -23,7 +23,17 @@ namespace BLL.Services
         {
             var events = Query(model);
 
-            return null;
+            var dict = events.GroupBy(x => x.Name)
+                .Select(x => new
+                {
+                    EventName = x.Key,
+                    Count = x.Count()
+                }).ToDictionary(x => x.EventName, x => x.Count);
+
+            return new EventCountStatisticDto()
+            {
+                EventDataCount = dict
+            };
         }
 
         public IEnumerable<QueryStatisticDto> Query(QueryStatisticModel model)

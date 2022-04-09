@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - volgaHack</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/js/bootstrap.js" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="></script>
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,8 +33,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Application" asp-action="Index">Приложения</a>
                         </li>
                         @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Statistic" asp-action="Index">Статистика по приложениям</a>
-                        </li>*@
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Statistic" asp-action="Index">Статистика по приложениям</a>
+                            </li>*@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
@@ -41,7 +49,7 @@
                             }
                             if (@User.IsInRole("user"))
                             {
-                                
+
                                 <li class="nav-item">
 
                                     <p class="nav-link text-dark" asp-action="Index" asp-controller="Person">Пользователь</p>
@@ -80,9 +88,8 @@
             &copy; 2022 - volgaHack - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+   
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -45,16 +45,48 @@ namespace volgaHack.Controllers
             return View(statistics);
         }
 
-        //[HttpPost]
-        //public IActionResult StatisticQuery([FromBody] StatisticQueryRequest  model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(new StatisticQueryViewModel()
-        //        {
-        //        });
-        //    }
-        //}
+        [HttpGet()]
+        public IActionResult Graphics([FromRoute] int? id)
+        {
+            if (id is null)
+            {
+                return Ok(new GraphicsDataResult
+                {
+                    Data = new List<int>(),
+                    AppId = id.Value
+                });
+            }
 
+            var data = _statisticService.EventCount(new QueryStatisticModel { ApplicationId = id.Value });
+
+            return View(new GraphicsDataResult
+            {
+                Data = data.EventDataCount.Select(x=> x.Value).ToList(),
+                Labels = data.EventDataCount.Select(x=> x.Key).ToList(),
+                AppId = id.Value
+            });
+        }
+
+        [HttpGet("data/{appId?}")]
+        public IActionResult GetData([FromQuery] int? appId)
+        {
+            if(appId is null)
+            {
+                return Ok(new GraphicsDataResult
+                {
+                    Data = new List<int>(),
+                    AppId = appId.Value
+                }); 
+            }
+
+            var data = _statisticService.EventCount(new QueryStatisticModel { ApplicationId = appId.Value });
+
+            return Ok(new GraphicsDataResult
+            {
+                Data = data.EventDataCount.Select(x => x.Value).ToList(),
+                Labels = data.EventDataCount.Select(x => x.Key).ToList(),
+                AppId = appId.Value
+            });
+        }
     }
 }
