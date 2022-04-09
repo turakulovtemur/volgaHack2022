@@ -17,7 +17,7 @@
         const data = {
             labels: labels,
             datasets: [{
-                label: `Статистика событий по приложению ${dataSetName}`,
+                label: `События`,
                 data: graphicsValues,
                 backgroundColor: colors,
                 borderColor: borderColors,
@@ -32,6 +32,12 @@
                 scales: {
                     y: {
                         beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `Статистика событий по приложению ${dataSetName}`,
                     }
                 }
             },
